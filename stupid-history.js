@@ -4,7 +4,7 @@
  */
 function History() {
     this._history = [];
-    this._offset = undefined;
+    this._offset = 0;
 }
 
 /**
@@ -14,10 +14,7 @@ function History() {
 History.prototype.navigateUp = function () {
     var history = this._history;
 
-    if (this._offset === undefined) {
-        this._offset = 0;
-    }
-    else if (this._offset > 0) {
+    if (this._offset > 0) {
         this._offset--;
     }
 
@@ -35,10 +32,7 @@ History.prototype.navigateUp = function () {
 History.prototype.navigateDown = function () {
     var history = this._history;
 
-    if (this._offset === undefined) {
-        this._offset = 0;
-    }
-    else if (this._offset + 1 < history.length) {
+    if (this._offset + 1 < history.length) {
         this._offset++;
     }
 
@@ -54,7 +48,7 @@ History.prototype.navigateDown = function () {
  */
 History.prototype.clear = function () {
     this._history = [];
-    this._offset = undefined;
+    this._offset = 0;
 };
 
 /**
@@ -63,7 +57,7 @@ History.prototype.clear = function () {
  */
 History.prototype.add = function (obj) {
     this._history.push(obj);
-    this._offset = undefined;
+    this._offset = 0;
 };
 
 /**
@@ -76,4 +70,8 @@ History.prototype.get = function () {
         this._history.length === 0)
         return false;
     return this._history[this._offset];
+};
+
+History.prototype.resetOffset = function () {
+    this._offset = 0;
 };
