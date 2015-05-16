@@ -17,12 +17,18 @@ describe("StupidHistory", function () {
         expect(history.get()).toEqual("bar");
     });
 
-    it("should return the last object if navigateDown() got called after it already reached the bottom object", function () {
+    it("should return the bottom object if navigateDown() got called after it already reached the bottom object", function () {
         history.add("foo");
         history.add("bar");
         history.navigateDown();
         history.navigateDown();
         expect(history.get()).toEqual("bar");
+    });
+
+    it("navigateDown() should return false when the navigation offset is already at the top object", function () {
+        history.add("foo");
+        history.navigateDown();
+        expect(history.navigateDown()).toEqual(false);
     });
 
     it("shoud navigate one object up and return it", function () {
@@ -33,7 +39,13 @@ describe("StupidHistory", function () {
         expect(history.get()).toEqual("foo");
     });
 
-    it("should return the first object if navigateUp() got called after it already reached the top object", function () {
+    it("navigateUp() should return false when the navigation offset is already at the top object", function () {
+        history.add("foo");
+        history.navigateUp();
+        expect(history.navigateUp()).toEqual(false);
+    });
+
+    it("should return the top object if navigateUp() got called after it already reached the top object", function () {
         history.add("foo");
         history.navigateUp();
         history.navigateUp();
@@ -47,7 +59,7 @@ describe("StupidHistory", function () {
         expect(history.get()).toEqual(false);
     });
 
-    it("should reset the navigation offset", function(){
+    it("should reset the navigation offset", function () {
         history.add("foo");
         history.add("bar");
         history.navigateDown();

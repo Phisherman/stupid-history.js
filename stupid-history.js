@@ -17,6 +17,8 @@ StupidHistory.prototype.navigateUp = function () {
     if (this._offset > 0) {
         this._offset--;
     }
+    else
+        return false;
 
     if (history && history.length > 0) {
         return (history[history.length - this._offset - 1]);
@@ -35,6 +37,8 @@ StupidHistory.prototype.navigateDown = function () {
     if (this._offset + 1 < history.length) {
         this._offset++;
     }
+    else
+        return false;
 
     if (history && history.length > 0) {
         return (history[history.length - this._offset - 1]);
@@ -57,7 +61,6 @@ StupidHistory.prototype.clear = function () {
  */
 StupidHistory.prototype.add = function (obj) {
     this._history.push(obj);
-    this._offset = 0;
 };
 
 /**
